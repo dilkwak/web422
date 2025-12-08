@@ -1,6 +1,6 @@
 import '@/styles/bootstrap.min.css';
 import "@/styles/globals.css";
-
+import RouteGuard from "@/components/RouteGuard";
 import Layout from '@/components/Layout';
 import { SWRConfig } from 'swr';
 
@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
   return (
   <SWRConfig value={{ fetcher }}>
     <Layout>
-      <Component {...pageProps} />
+      <RouteGuard><Component {...pageProps} /></RouteGuard>
     </Layout>
   </SWRConfig>
   );

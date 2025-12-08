@@ -1,3 +1,17 @@
+/*********************************************************************************
+* WEB422 – Assignment 3
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: Dillon Kwak Student ID: 135389203 Date: ________________
+*
+* Vercel App (Deployed) Link: https://web422-sage.vercel.app/
+*
+********************************************************************************/
+
 import { useForm } from "react-hook-form";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useRouter } from "next/router";

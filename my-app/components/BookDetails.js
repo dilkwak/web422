@@ -1,20 +1,23 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useAtom } from 'jotai';
-import { favouritesAtom } from '@/store';
-import { useState } from 'react';
+import { useAtom } from "jotai";
+import { favouritesAtom } from "@/store";
+import { useState, useEffect } from "react";
+import { addToFavourites, removeFromFavourites } from "@/lib/userData";
 
 export default function BookDetails({ book, workId, showFavouriteBtn = true }) {
-
     const [favouritesList, setFavouritesList] = useAtom(favouritesAtom);
-    const [showAdded, setShowAdded] = useState(favouritesList.includes(workId));
+    const [showAdded, setShowAdded] = useState(false);
 
-    function favouritesClicked() {
+    useEffect(() => {
+        setShowAdded(favouritesList?.includes(workId));
+    }, [favouritesList, workId]);
 
+    async function favouritesClicked() {
         if (showAdded) {
-            setFavouritesList(current => current.filter(fav => fav != workId));
+            setFavouritesList(await removeFromFavourites(workId));
             setShowAdded(false);
         } else {
-            setFavouritesList(current => [...current, workId]);
+            setFavouritesList(await addToFavourites(workId));
             setShowAdded(true);
         }
     }
@@ -26,7 +29,7 @@ export default function BookDetails({ book, workId, showFavouriteBtn = true }) {
                     <Col lg="4">
                         <img
                             onError={(event) => {
-                                event.target.onerror = null; // Remove the event handler to prevent infinite loop
+                                event.target.onerror = null;
                                 event.target.src =
                                     "https://placehold.co/400x600?text=Cover+Not+Available";
                             }}
@@ -41,7 +44,9 @@ export default function BookDetails({ book, workId, showFavouriteBtn = true }) {
                         <h3>{book.title}</h3>
                         {book.description && (
                             <p>
-                                 {typeof book.description === "string" ? book.description : book.description.value}
+                                {typeof book.description === "string"
+                                    ? book.description
+                                    : book.description.value}
                             </p>
                         )}
 
@@ -75,10 +80,18 @@ export default function BookDetails({ book, workId, showFavouriteBtn = true }) {
                             </>
                         )}
 
-                        {showFavouriteBtn && <><br /><Button variant={showAdded ? "primary" : "outline-primary"} onClick={favouritesClicked}>+ Favourite {showAdded && "( added )"}</Button></>}
-
+                        {showFavouriteBtn && (
+                            <>
+                                <br />
+                                <Button
+                                    variant={showAdded ? "primary" : "outline-primary"}
+                                    onClick={favouritesClicked}
+                                >
+                                    + Favourite {showAdded && "( added )"}
+                                </Button>
+                            </>
+                        )}
                     </Col>
-                    
                 </Row>
             </Container>
         </>
