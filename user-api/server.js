@@ -15,7 +15,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const HTTP_PORT = process.env.PORT || 8080;
 
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("JWT"),
     secretOrKey: process.env.JWT_SECRET
 };
 
@@ -95,3 +95,4 @@ userService.connect()
     console.log("unable to start the server: " + err);
     process.exit();
 });
+
