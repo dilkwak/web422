@@ -6,7 +6,7 @@ function authHeaders() {
     const token = getToken();
     return {
         "Content-Type": "application/json",
-        Authorization: `jwt ${token}`
+        Authorization: `JWT ${token}`
     };
 }
 

@@ -28,7 +28,7 @@ export default function Login() {
 
             if (success) {
                 await updateAtom();
-                router.push("/favourites");
+                router.push("/");
             } else {
                 setWarning("Login failed.");
             }

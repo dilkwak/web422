@@ -15,10 +15,8 @@ export default function BookDetails({ book, workId, showFavouriteBtn = true }) {
     async function favouritesClicked() {
         if (showAdded) {
             setFavouritesList(await removeFromFavourites(workId));
-            setShowAdded(false);
         } else {
             setFavouritesList(await addToFavourites(workId));
-            setShowAdded(true);
         }
     }
 

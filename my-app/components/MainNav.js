@@ -18,7 +18,7 @@ export default function MainNav() {
             <Navbar expand="lg" className="navbar-dark bg-dark fixed-top">
                 <Container>
                     <Navbar.Brand as={Link} href="/">
-                        Student Name
+                        Dillon Kwak
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
