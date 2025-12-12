@@ -1,4 +1,4 @@
-const API_URL = process.env.VERCEL_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function setToken(token) {
     if (typeof window !== "undefined") {
@@ -54,3 +54,19 @@ export async function authenticateUser(userName, password) {
         throw new Error(err.message || "Login failed");
     }
 }
+
+export async function registerUser(userName, password, password2) {
+    const res = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userName, password, password2 })
+    });
+
+    if (res.status === 200) {
+        return true;
+    } else {
+        const err = await res.json();
+        throw new Error(err.message || "Registration failed");
+    }
+}
+
